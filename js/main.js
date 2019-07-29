@@ -4,16 +4,17 @@ var button = document.getElementById("btn");
 var title = document.getElementById("headline");
 var listItems = document.getElementById("mylist").getElementsByTagName("li");
 
-for (i = 0; i < listItems.length; i++) {
-    listItems[i].addEventListener("click", activateItem);
-}
-function activateItem() {
-    title.innerHTML = this.innerHTML;
-    for (i = 0; i < listItems.length; i++) {
-        listItems[i].classList.remove("active");
+mylist.addEventListener("click", activateItem);
+
+function activateItem(e) {
+    if (e.target.nodeName == "LI") {
+        title.innerHTML = e.target.innerHTML;
+        for (i=0; i<e.target.parentNode.children.length; i++){
+            e.target.parentNode.children[i].classList.remove("active");
+        }
+        e.target.classList.add("active");
+        }
     }
-    this.classList.add("active");
-}
 
 button.addEventListener("click", createNewItems);
 
